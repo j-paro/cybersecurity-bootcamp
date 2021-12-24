@@ -1,0 +1,9 @@
+The player and dealer that are colluding together are Mylie Schmidt and Billy Jones respectively.
+
+From the Player Analysis, Mylie Schmidt was playing during all major losses.
+
+From the Dealer Analysis, Billy Jones was dealing during almost all major losses.
+
+Scripts Information:
+- The assignment asked us to write multiple scripts to get dealers that worked during losses. Instead I simply wrote one script -- "find_dealers_for_losses.sh".
+- The "find_dealers_for_date_and_time.sh" is the main workhorse script that the find dealers scripts will use. It will format check the date and time inputs. I did this even though it wasn't required to practice regular expresssions.
