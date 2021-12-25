@@ -4,7 +4,7 @@ The files in this repository were used to configure the network depicted below.
 
 ![](./Diagrams/Unit-13-NetworkDiagram.png)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat. *** This paragraph is just all kinds of confusing. ***
 
   - _TODO: Enter the playbook file._
 
@@ -19,30 +19,27 @@ This document contains the following details:
 
 ### Description of the Topology
 
-The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
+The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the Damn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+Load balancing ensures that the application will be highly available, in addition to restricting access to the network by acting as a gateway to the webservers thus shielding the web servers from the Internet directly. Load balancers also protect against DDoS attacks. *** Why have a TO-DO about the jump box when the sentence with the fields doesn't reference the jump box at all? ***
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the system logs and system performance. *** This seems both very specific and very vague. ***
 
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-| Name               | Function        | IP Address | Operating System |
-|--------------------|-----------------|------------|------------------|
-| JumpBoxProvisioner | Ansible Server  | 10.0.0.4   | Ubuntu 20.04     |
-| Web-1              | DVWA Web Server | 10.0.0.5   | Ubuntu 20.04     |
-| Web-2              | DVWA Web Server | 10.0.0.6   | Ubuntu 20.04     |
-| ELK-Server         | ELK Server      | 10.0.1.4   | Ubuntu 20.04     |
+| Name               | Function                    | IP Address | Operating System |
+|--------------------|-----------------------------|------------|------------------|
+| JumpBoxProvisioner | Ansible Server and Gateway  | 10.0.0.4   | Ubuntu 20.04     |
+| Web-1              | DVWA Web Server             | 10.0.0.5   | Ubuntu 20.04     |
+| Web-2              | DVWA Web Server             | 10.0.0.6   | Ubuntu 20.04     |
+| ELK-Server         | ELK Server                  | 10.0.1.4   | Ubuntu 20.04     |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+Only the JumpBoxProvisioner machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 - My residential IP address which I will not print here.
 
 Machines within the network can only be accessed by the JumpBoxProvisioner.
@@ -51,7 +48,7 @@ A summary of the access policies in place can be found in the table below.
 
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
+| From JumpBoxProvisioner | Yes/No              | 10.0.0.1 10.0.0.2    |
 |          |                     |                      |
 |          |                     |                      |
 
@@ -68,18 +65,20 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+![](./Ansible/Images/docker_ps.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+- Web-1: 10.0.0.5
+- Web-2: 10.0.0.6
 
 We have installed the following Beats on these machines:
 - Filebeat
 - Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- Metricbeat will collect metrics and statistics from both a machine's operating system as well as the services running on the machine. One of the basic stats I would expect to see is the machine's CPU usage.
+- Filebeat will monitor logs -- we set which logs to monitor -- and track changes to those logs. Given we're shipping log data off to an ELK server, I would expect to see log change events related to Kibana, Elasticsearch, Metricbeat, etc.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
