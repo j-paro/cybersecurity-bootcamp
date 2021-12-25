@@ -2,7 +2,7 @@
 
 The files in this repository were used to configure the network depicted below.
 
-![Alt Text](./Diagrams/Unit-13-NetworkDiagram.png)
+![](./Diagrams/Unit-13-NetworkDiagram.png)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
 
@@ -31,12 +31,12 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-| Name     | Function | IP Address | Operating System |
-|----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.4   | Linux            |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
+| Name       | Function   | IP Address | Operating System |
+|------------|------------|------------|------------------|
+| Jump Box   | Gateway    | 10.0.0.4   | Linux            |
+| Web-1      | Web Server | 10.0.0.5   |                  |
+| Web-2      | Web Server | 10.0.0.6   |                  |
+| ELK-Server |          |            |                  |
 
 ### Access Policies
 
@@ -61,9 +61,11 @@ A summary of the access policies in place can be found in the table below.
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because of many reasons. It's main advantage is its representation of infrastructure as code (IAC). In case configuration needs to be performed again, we're guaranteed to get the same configuration and avoid manual keying errors. Also, the Ansible playbook acts as documentation of exactly what was configured for future reference.
 
 The playbook implements the following tasks:
-- Using "apt", "docker.io" and "pip" (Python's package manager) are installed.
-- Using "pip", the "docker" Python SDK is installed.
-- Using "sysctl", virtual memory is increased so ELK can run properly. See the following: [Virtual Memory and ELK](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html)
+- Using Ansible's "apt" module, "docker.io" and "pip" (Python's package manager) are installed.
+- Using Ansible's "pip" module, the "docker" Python SDK is installed.
+- Virtual memory is increased so ELK can run properly. See the following: [Virtual Memory and ELK](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html)
+- Using Ansible's "docker_container" module, a docker ELK container is downloaded and launched.
+- Using Ansible's "systemd" module, the docker service is set so it launches upon boot.
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
@@ -74,7 +76,8 @@ This ELK server is configured to monitor the following machines:
 - _TODO: List the IP addresses of the machines you are monitoring_
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+- Filebeat
+- Metricbeat
 
 These Beats allow us to collect the following information from each machine:
 - _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
