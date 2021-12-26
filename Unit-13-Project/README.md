@@ -26,7 +26,6 @@ Load balancing ensures that the application will be highly available, in additio
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the system logs and system performance. *** This seems both very specific and very vague. ***
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name               | Function                    | IP Address | Operating System |
 |--------------------|-----------------------------|------------|------------------|
@@ -37,7 +36,7 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 
 ### Access Policies
 
-The machines on the internal network are not exposed to the public Internet. 
+The machines on the internal network are not exposed to the public Internet. *** This statement is simply false. ***
 
 Only the JumpBoxProvisioner machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 - My residential IP address which I will not print here.
@@ -84,7 +83,7 @@ These Beats allow us to collect the following information from each machine:
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
+- Copy the "install-elk.yml" file to "/etc/ansible".
 - Update the _____ file to include...
 - Run the playbook, and navigate to http://52.165.177.244:5601/app/kibana to check that the installation worked as expected.
 
