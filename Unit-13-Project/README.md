@@ -78,7 +78,7 @@ In order to use the playbook, you will need to have an Ansible control node alre
 
 ### Web Servers
 SSH into the control node and perform the following steps:
-- 
+- Copy the `install-elk.yml` file to `/etc/ansible`.
 
 ### ELK Server
 SSH into the control node and perform the following steps:
