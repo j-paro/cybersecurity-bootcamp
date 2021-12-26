@@ -1,5 +1,4 @@
 # Load-Balanced Web Servers and an ELK Stack Deployed by Ansible
-
 The following diagram documents the Azure environment created for running and monitoring the Damn Vulnerable Web Application.
 
 ![](./Diagrams/Unit-13-NetworkDiagram.png)
@@ -13,7 +12,6 @@ This document contains the following details:
 - How to Use the Ansible Build
 
 ## Description of the Topology
-
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the Damn Vulnerable Web Application.
 
 Load balancing ensures that the application will be highly available, in addition to restricting access to the network by acting as a gateway to the webservers thus shielding the web servers from the Internet directly. Load balancers also protect against DDoS attacks.
@@ -30,7 +28,6 @@ The configuration details of each machine may be found below.
 | ELK-Server         | ELK Server                  | 10.0.1.4   | Ubuntu 20.04     |
 
 ## Access Policies
-
 The web servers on the RedTeamNetwork are not exposed to the public Internet. They are accessed through the load balancer. 
 
 Only the JumpBoxProvisioner machine on the RedTeamNetwork can accept connections (SSH) from the Internet. Access to this machine is only allowed from the following IP addresses:
@@ -46,7 +43,7 @@ A summary of the access policies in place can be found in the table below.
 | Web-1              | No                          | 10.0.0.4 (JumpBoxProvisioner)               |
 | Web-2              | No                          | 10.0.0.4 (JumpBoxProvisioner)               |
 | ELK-Server         | Yes (Kibana over port 5601) | My Residential IP (5601) and 10.0.0.4 (SSH) |
-| ELK-Server         | 
+| Load Balancer      | Yes (Port 80)               | My Residential IP                           |
 
 ## Elk Configuration
 
@@ -77,9 +74,14 @@ These Beats allow us to collect the following information from each machine:
 - Filebeat will monitor logs -- we set which logs to monitor -- and track changes to those logs. Given we're shipping log data off to an ELK server, I would expect to see log change events related to Kibana, Elasticsearch, Metricbeat, etc.
 
 ## Using Ansible
-In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
+In order to use the playbook, you will need to have an Ansible control node already configured. All steps in the following sections assume you have such a control node provisioned and running.
 
-SSH into the control node and follow the steps below:
+### Web Servers
+SSH into the control node and perform the following steps:
+- 
+
+### ELK Server
+SSH into the control node and perform the following steps:
 - Copy the `install-elk.yml` file to `/etc/ansible`.
 - Update the _____ file to include...
 - Run the playbook, and navigate to http://52.165.177.244:5601/app/kibana to check that the installation worked as expected.
