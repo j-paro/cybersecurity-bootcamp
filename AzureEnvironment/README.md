@@ -65,7 +65,7 @@ This ELK server is configured to monitor the following machines:
 - Web-1: 10.0.0.5
 - Web-2: 10.0.0.6
 
-We have installed the following Beats on these machines:
+We have installed the following Beats (installation instructions and configuration are not in this README) on these machines:
 - Metricbeat
 - Filebeat
 
@@ -78,17 +78,15 @@ In order to use the playbook, you will need to have an Ansible control node alre
 
 ### Web Servers
 SSH into the control node and perform the following steps:
-- Copy the `install-elk.yml` file to `/etc/ansible`.
+- Copy the [dvwa-for-webservers.yml](https://github.com/BizTheDad/cybersecurity-bootcamp/blob/main/AzureEnvironment/Ansible/Playbooks/dvwa-for-webservers.yml) file to `/etc/ansible`.
+  - Do this with the following command `curl https://raw.githubusercontent.com/BizTheDad/cybersecurity-bootcamp/main/AzureEnvironment/Ansible/Playbooks/dvwa-for-webservers.yml > /etc/ansible/dvwa-for-webservers.yml`
+- Update the `/etc/ansible/hosts` file to include the line `[webservers]' -- this creates a group called "webservers" -- and add the webservers' internal IP addresses on separate lines underneath it.
+- Run the playbook using the command `ansible-playbook /etc/ansible/dvwa-for-webservers.yml`
 
 ### ELK Server
 SSH into the control node and perform the following steps:
-- Copy the `install-elk.yml` file to `/etc/ansible`.
-- Update the _____ file to include...
+- Copy the [install-elk.yml](https://github.com/BizTheDad/cybersecurity-bootcamp/blob/main/AzureEnvironment/Ansible/Playbooks/install-elk.yml) file to `/etc/ansible`.
+  - Do this with the following command: ` curl https://raw.githubusercontent.com/BizTheDad/cybersecurity-bootcamp/main/AzureEnvironment/Ansible/Playbooks/install-elk.yml > /etc/ansible/install-elk.yml`
+- Update the `/etc/ansible/hosts` file to include the line `[elk]' -- this creates a group called "elk" -- and add the ELK server's internal IP address on a separate line underneath it.
+- Run the playbook using the command `ansible-playbook /etc/ansible/install-elk.yml`
 - Run the playbook, and navigate to http://52.165.177.244:5601/app/kibana to check that the installation worked as expected.
-
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
-
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
