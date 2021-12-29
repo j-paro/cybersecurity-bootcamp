@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+#
+###############################################################################
+# Environment
+###############################################################################
+
+# $_ME
+#
+# This program's basename.
+_ME="$(basename "${0}")"
+
+###############################################################################
+# Help
+###############################################################################
+
+# _print_help()
+#
+# Usage:
+#   _print_help
+#
+# Print the program help information.
+_print_help() {
+  cat <<HEREDOC
+Program to warn administrators of problematic user setup. You will most likely
+need to run this script with 'sudo'.
+
+Usage:
+  $(_usage)
+
+Options:
+  -h --help  Show this screen.
+HEREDOC
+}
+
+_usage() {
+  printf "sudo Usage: %s [OPTION]" "${_ME}"
+}
+
+###############################################################################
+# Functions
+###############################################################################
+
+_report_header() {
+    printf "---------------------------"
+    printf "Your Results"
+    printf "---------------------------"
+}
+
+_check_for_zero_users() {
+    printf "These non-root users have ID 0:"
+    
+}
+
+###############################################################################
+# Main
+###############################################################################
+
+_main() {
+  if [[ -z "${1:-}" ]]
+  then
+    _report_header
+  else
+    if [[ "${1}" =~ ^-h|--help$  ]]
+    then
+      _print_help
+    else
+      printf "Error: invalid option '%s'" "${1}"
+      exit 1
+    fi
+  fi
+}
+
+# Call `_main` after everything has been defined.
+_main "$@"

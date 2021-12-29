@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+#
+###############################################################################
+# Environment
+###############################################################################
+
+# $_ME
+#
+# This program's basename.
+_ME="$(basename "${0}")"
+
+###############################################################################
+# Help
+###############################################################################
+
+# _print_help()
+#
+# Usage:
+#   _print_help
+#
+# Print the program help information.
+_print_help() {
+  cat <<HEREDOC
+Program to lock a user and remove them from all but their primary group. Also,
+their home directory and its contents will be moved to "/locked_users"
+
+Usage:
+  ${_ME} USERNAME
+
+Options:
+  -h --help  Show this screen.
+HEREDOC
+}
+
+_usage() {
+  echo "Usage: ${_ME} USERNAME"
+}
+
+###############################################################################
+# Main
+###############################################################################
+
+_main() {
+  if [[ -z "${1:-}" ]]
+  then
+    usage
+    exit 1
+  else
+    if [[ "${1}" =~ ^-h|--help$  ]]
+    then
+      _print_help
+    else
+      usermod -L "${1}"
+      usermod -G "${1}" "${1}"
+
+      if [[ ! -d /locked_users ]]
+      then
+        mkdir /locked_users
+      fi
+      mv /home/"${1}" /locked_users/"${1}"
+    fi
+  fi
+}
+
+# Call `_main` after everything has been defined.
+_main "$@"
