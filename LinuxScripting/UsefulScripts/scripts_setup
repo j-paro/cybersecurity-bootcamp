@@ -70,6 +70,7 @@ _main() {
         _get_script inpval https://github.com/BizTheDad/inpval/raw/main/executable/inpval
         _get_script lockusr https://raw.githubusercontent.com/BizTheDad/scripts/main/lockusr
         _get_script usrgrps https://raw.githubusercontent.com/BizTheDad/scripts/main/usrgrps
+        _get_script usrgrps https://raw.githubusercontent.com/BizTheDad/scripts/main/usrchk
     else
         if [[ "${1:-}" =~ ^-h|--help$  ]]
         then
