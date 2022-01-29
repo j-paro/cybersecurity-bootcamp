@@ -1,2 +1,2 @@
 # cybersecurity-bootcamp
-Public work for the U of MN's Cybersecurity Bootcamp
+Coursework for the U of MN Cybersecurity Bootcamp
